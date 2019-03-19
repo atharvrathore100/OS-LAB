@@ -1,0 +1,45 @@
+package partition;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class MVT {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n;
+        System.out.println("enter number of blocks: ");
+        n=sc.nextInt();
+        
+        Integer[] flag=new Integer[n];
+        Arrays.fill(flag, 0);
+        
+        Double[] BS=new Double[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter the size of block "+(i+1)+": ");
+            BS[i]=sc.nextDouble();
+        }
+        int n1;
+        System.out.println("enter number of processes: ");
+        n1=sc.nextInt();
+        Double[] PS=new Double[n1];
+        for (int i = 0; i < n1; i++) {
+            System.out.println("Enter the memory required for process "+(i+1)+": ");
+            PS[i]=sc.nextDouble();
+        }
+        for (int i = 0; i < n1; i++) {
+            for (int j = 0; j < n; j++) {
+                if(PS[i]>BS[j])
+                    continue;
+                else{
+                    BS[j]=BS[j]-PS[i];
+                    flag[j]=i+1;
+                    break;
+                }
+            }
+        }
+        System.out.println("the flag aray is....");
+        for (int i = 0; i < n; i++) {
+            System.out.println(flag[i]);
+        }
+    }
+}

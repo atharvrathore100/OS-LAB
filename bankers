@@ -1,0 +1,64 @@
+package Bankers;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Bankersalgo {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n;
+        System.out.println("Enter the number of proceses:");
+        n= sc.nextInt();
+        Double[][] allocation=  new Double[4][n];
+        Double[][] max=  new Double[4][n];
+        Double[] avail=  new Double[4];
+        
+        System.out.println("Enter the allocated resources to processes :");
+        System.out.println("A B C D");
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < 4; j++) 
+            {
+                allocation[i][j]=sc.nextDouble();
+            }
+        }
+        System.out.println("Enter the maximum resources required to processes :");
+        System.out.println("A B C D");
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < 4; j++) 
+            {
+                max[i][j]=sc.nextDouble();
+            }
+        }
+        System.out.println("Enter the resources available:");
+        System.out.println("A B C D");
+        for (int i = 0; i < 4; i++) {
+            avail[i]=sc.nextDouble();
+        }
+        //real coding starts.....
+        
+        boolean[] safe=new boolean[n];
+        Arrays.fill(safe, false);
+        int k=1;
+        while(k==1)
+        {
+        for (int i = 0; i < n; i++) {
+            if(Arrays.equals(allocation[i], avail))
+            {
+                for (int j = 0; j < 4; j++) 
+                {
+                    avail[j]=avail[j]+allocation[i][j];
+                    safe[i]=true;
+                }
+            }
+            if(!Arrays.asList(safe).contains(false))
+            {
+                System.out.println("SAFE");
+                k=0;
+                break;
+            }
+        }
+        }
+    }
+}
